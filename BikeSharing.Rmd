@@ -23,7 +23,11 @@ library(skimr)
 library(lubridate)
 ```
 
-### 1. Collect Data The project officially begins with importing all the needed data. \#### Import datasets of 2022 data
+### 1. Collect Data 
+
+The project officially begins with importing all the needed data. 
+
+#### Import datasets of 2022 data
 
 ```{r Datasets of 2022}
 jan_2022 <- read_csv("~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202201-divvy-tripdata.csv")
