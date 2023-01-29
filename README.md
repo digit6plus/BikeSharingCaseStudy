@@ -1,2 +1,2 @@
-# BikeSharingCaseStudy
-This is a case study about a bike sharing company.
+# Bike Sharing Case Study
+Please see link: https://digit6plus.github.io/BikeSharingCaseStudy/
