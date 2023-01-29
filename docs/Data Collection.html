@@ -11,8 +11,9 @@
 
 <meta name="author" content="Robert Martin Sim" />
 
+<meta name="date" content="2023-01-29" />
 
-<title>Home</title>
+<title>Data Collection</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,16 +350,155 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Data Collection</h1>
 <h4 class="author">Robert Martin Sim</h4>
+<h4 class="date">2023-01-29</h4>
 
 </div>
 
 
-<div id="please-click-the-links-above-to-navigate-what-part-of-the-study-you-want-to-view." class="section level2">
-<h2>Please click the links above to navigate what part of the study you
-want to view.</h2>
-</div>
+<p>The project officially begins with importing all the needed data.
+#### Import datasets of 2022 data</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages
+## ───────────────────────────────────────
+## tidyverse 1.3.2 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.4.0     ✔ purrr   1.0.0
+## ✔ tibble  3.1.8     ✔ stringr 1.5.0
+## ✔ tidyr   1.2.1     ✔ forcats 0.5.2
+## ✔ readr   2.1.3     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>jan_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202201-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 103770 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>feb_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202202-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 115609 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>mar_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202203-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 284042 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>apr_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202204-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 371249 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>may_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202205-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 634858 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>jun_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202206-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 769204 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>jul_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202207-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 823488 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>aug_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202208-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 785932 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>sep_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202209-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 701339 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>oct_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202210-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 558685 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>nov_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202211-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 337735 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>dec_2022 &lt;- read_csv(&quot;~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202212-divvy-tripdata.csv&quot;)</code></pre>
+<pre><code>## Rows: 181806 Columns: 13
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (7): ride_id, rideable_type, start_station_name, start_station_id, end_...
+## dbl  (4): start_lat, start_lng, end_lat, end_lng
+## dttm (2): started_at, ended_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 
 
 
