@@ -12,7 +12,9 @@ output: html_document
 <br>
 
 ### Loading Required Packages
+
 The packages contains the functions that will be used in this project. If they cannot be loaded, the packages must be installed first.
+
 ```{r Load packages}
 library(dplyr)
 library(tidyverse)
@@ -21,10 +23,8 @@ library(skimr)
 library(lubridate)
 ```
 
-<br>
-### 1. Collect Data
-The project officially begins with importing all the needed data.
-#### Import datasets of 2022 data
+### 1. Collect Data The project officially begins with importing all the needed data. \#### Import datasets of 2022 data
+
 ```{r Datasets of 2022}
 jan_2022 <- read_csv("~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202201-divvy-tripdata.csv")
 feb_2022 <- read_csv("~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/202202-divvy-tripdata.csv")
@@ -41,8 +41,11 @@ dec_2022 <- read_csv("~/Bike-Sharing/Case Study - Bike-Share/Datasets/2022/20221
 ```
 
 ### 2. Wrangle Data and Combine Into a Single Datset
-##### 2.2 Compare column  of datasets
+
+##### 2.2 Compare column of datasets
+
 Column names of each uploaded datasets are then compared.
+
 ```{r Call out column names}
 colnames(jan_2022)
 colnames(feb_2022)
@@ -57,22 +60,24 @@ colnames(oct_2022)
 colnames(nov_2022)
 colnames(dec_2022)
 ```
+
 It could be seen that they possess the same column names.
 
 ##### 2.3 Compare datatype of each datasets using loop
+
 ```{r Call out datatypes of each datasets}
 months_2022 <- list(jan_2022, feb_2022, mar_2022, apr_2022, may_2022, jun_2022, jul_2022, aug_2022, sep_2022, oct_2022, nov_2022, dec_2022)
 results <- lapply(months_2022, function(month) Map(function(a, b) all(class(a) == class(b)), jan_2022, month))
 print(results)
 ```
 
-
 ##### 2.4 Stack individual dateset into one dataset
+
 ```{r Bind all into one dataset}
 all_trips <- bind_rows(jan_2022, feb_2022, mar_2022, apr_2022, may_2022, jun_2022, jul_2022, aug_2022, sep_2022, oct_2022, nov_2022, dec_2022)
 ```
 
-#### Step 3: Clean up and Add Data to Prepare for Analysis
+### 3. Clean up and Add Data to Prepare for Analysis
 
 ```{r Check state of combined dataset}
 colnames(all_trips)
@@ -99,28 +104,34 @@ all_trips <- all_trips %>% mutate(day_of_the_week = wday(as.Date(all_trips$start
 ```
 
 ##### 3.3 Add month_of_year column in making month as number ( 1 = January)
+
 ```{r Convert months to numeric}
 all_trips <- all_trips %>% mutate(month_of_year = month(as.Date(all_trips$started_at)))
 ```
 
 ##### 3.4 Adding column ride_length
+
 ```{r Calculate duration and set to *ride_length*}
 all_trips$ride_length <- difftime(all_trips$ended_at,all_trips$started_at)
 ```
 
 ##### 3.5 Convert column ride_length to numeric
+
 ```{r *ride_length* to numeric}
 all_trips$ride_length <- as.numeric(as.character(all_trips$ride_length))
 is.numeric(all_trips$ride_length)
 ```
 
 ##### 3.4 Remove negative ride_length
+
 ```{r Remove negative from column}
 all_trips_v2 <- all_trips[!(all_trips$start_station_name == "HQ QR" | all_trips$ride_length<0),]
 ```
 
-#### Step 4: Conduct Descriptive Analysis
+### 4. Conduct Descriptive Analysis
+
 ##### 4.1 ride_length descriptive analysis (in sec)
+
 ```{r Analysis of column}
 summary(all_trips_v2$ride_length)
 ```
@@ -134,7 +145,6 @@ aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = max)
 aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = min)
 ```
 
-
 ##### 4.3 Compare average ride_length by each day for each members vs casual
 
 ```{r Compare averages}
@@ -142,6 +152,7 @@ aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$d
 ```
 
 ##### 4.4 Visualize number by rides by rider type AND drop NA values; days_of_the_week VS number of rides
+
 ```{r Plot bar chart for days_of_the_week VS number of rides}
 all_trips_v2 %>%
   drop_na() %>%
@@ -167,6 +178,7 @@ all_trips_v2 %>%
 ```
 
 ##### 4.5 Visualize average duration; days_of_the_week VS ride_length
+
 ```{r Plot bar chart for days_of_the_week VS ride_length}
 all_trips_v2 %>%
   drop_na() %>%
@@ -192,6 +204,7 @@ all_trips_v2 %>%
 ```
 
 ##### 4.6 Visualize number of rides by subscription type; month_of_year VS number of rides
+
 ```{r Plot bar chart for month_of_year VS number of rides}
 all_trips_v2 %>%
   drop_na() %>%
@@ -241,8 +254,9 @@ all_trips_v2 %>%
         axis.text.x = element_text(size = 12),
         axis.text.y = element_blank())
 ```
-  
+
 ##### 4.8 Visualize number of rides; bike type vs number of rides
+
 ```{r Plot bar chart for bike_type VS number _of_rides}
 all_trips_v2 %>%
   drop_na() %>%
@@ -268,6 +282,7 @@ all_trips_v2 %>%
 ```
 
 ##### 4.9 Visualize average duration; bike type vs ride_length
+
 ```{r Plot bar chart for bike_type VS ride_length}
 all_trips_v2 %>%
   drop_na() %>%
@@ -291,8 +306,9 @@ all_trips_v2 %>%
         axis.text.x = element_text(size = 12),
         axis.text.y = element_blank())
 ```
-    
-##### 5. Export Summary File into csv
+
+### 5. Export Summary File into csv
+
 ```{r Summary of datasets exported to csv}
 counts <- aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual +
                       all_trips_v2$day_of_the_week +
@@ -300,4 +316,3 @@ counts <- aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual +
                       all_trips_v2$rideable_type, FUN = mean)
 write.csv(counts, file='~/Bike-Sharing/avg_ride_length.csv')
 ```
-
