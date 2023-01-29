@@ -1,7 +1,8 @@
 ---
 title: "Bike Sharing Case Study"
+knit: (function(input_file, encoding) {
+    out_dir <- 'docs';
 author: "Robert Martin Sim"
-date: "2023-01-29"
 output: html_document
 ---
 
