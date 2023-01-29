@@ -1,13 +1,5 @@
 ---
 title: "Data Collection"
-knit: (function(input_file, encoding) {
-    out_dir <- 'docs';
-    rmarkdown::render(input_file,
-      encoding=encoding,
-      output_file=file.path(dirname(input_file), out_dir, 'Data Collection.html'))})
-author: "Robert Martin Sim"
-date: "2023-01-29"
-output: html_document
 ---
 
 The project officially begins with importing all the needed data.
